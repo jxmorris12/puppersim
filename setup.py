@@ -39,6 +39,8 @@ setup(
         #"pybullet",
         "gym",
         "numpy",
+        "arspb",
+        "gin-config",
     ],
     classifiers=[
         "Development Status :: 4 - Beta",

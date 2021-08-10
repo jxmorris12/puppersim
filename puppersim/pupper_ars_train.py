@@ -362,6 +362,7 @@ class ARSLearner(object):
 
             # record statistics every 10 iterations
             if ((i + 1) % 10 == 0):
+                print(f'iteration {i} - outputting to {self.logdir}')
                 
                 rewards = self.aggregate_rollouts(num_rollouts = 100, evaluate = True)
                 w = ray.get(self.workers[0].get_weights_plus_stats.remote())

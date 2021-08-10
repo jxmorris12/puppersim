@@ -44,22 +44,20 @@ def create_pupper_env():
 def main(argv):
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument('--expert_policy_file', type=str, default="")
+    parser.add_argument('--expert_policy_file', type=str, default="", required=True)
     
     parser.add_argument('--render', action='store_true')
     parser.add_argument('--nosleep', action='store_true')
 
     parser.add_argument('--num_rollouts', type=int, default=20,
                         help='Number of expert rollouts')
-    parser.add_argument('--json_file', type=str, default="")
+    parser.add_argument('--json_file', type=str, default="", required=True)
     if len(argv):
       args = parser.parse_args(argv)
     else:
       args = parser.parse_args()
 
     print('loading and building expert policy')
-    if len(args.json_file)==0:
-      args.json_file = tp.getDataPath()+"/"+ args.envname+"/params.json"    
     with open(args.json_file) as f:
        params = json.load(f)
     print("params=",params)

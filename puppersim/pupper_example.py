@@ -35,8 +35,8 @@ flags.DEFINE_bool("render", True, "Whether to render the example.")
 FLAGS = flags.FLAGS
 CONFIG_DIR = puppersim.getPupperSimPath()+"/"
 _CONFIG_FILE = os.path.join(CONFIG_DIR, "pupper_with_imu.gin")
-_NUM_STEPS = 10000
-_ENV_RANDOM_SEED = 13
+_NUM_STEPS = 100000
+_ENV_RANDOM_SEED = 43
 
 
 def _load_config(render=False):
@@ -57,12 +57,14 @@ def run_example(num_max_steps=_NUM_STEPS):
   policy = static_gait_controller.StaticGaitController(env.robot)
     
   for _ in range(num_max_steps):
+    print('step:', _)
     #action = policy.act(observation)
     action = [0, 0.6,-1.2,0, 0.6,-1.2,0, 0.6,-1.2,0, 0.6,-1.2]
     obs, reward, done, _ = env.step(action)
     time.sleep(0.01)
     if done:
-      break
+      env.reset()
+      #break
 
 
 def main(_):
